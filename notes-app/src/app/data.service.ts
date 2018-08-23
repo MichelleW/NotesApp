@@ -14,6 +14,10 @@ export class DataService {
     return this._http.post('/notes', productObj);
   }
 
+  getAllNotes(){
+    console.log('getAllnotes :');
+    return this._http.get('/notes');
+  }
 
 
 

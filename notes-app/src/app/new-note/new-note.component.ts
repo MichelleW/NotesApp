@@ -1,3 +1,5 @@
+import { AllnotesComponent } from './../allnotes/allnotes.component';
+
 import { DataService } from './../data.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,38 +10,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewNoteComponent implements OnInit {
   newNoteObj: any;
-  str: any;
+  allNotesObj:any;
+  //create obj for t
+  msg: any;
   constructor(private _dataService: DataService) { }
 
   ngOnInit() {
+    this.allNotesObj = [];
     this.newNoteObj = { noteContent:"", timestamp: ""};
-    this.str = "hi"
+    this.msg = "hi";
+    this.getAllNotes();
   }
-  // addNote(){
-  //   this._dataService.addNote(this.newNoteObj)
-  //   .subscribe(
-  //     (response) =>{
-  //       this.newNoteObj = response;
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     }
-  //   )
-  // }
+ 
 
   createNew() {
     const tempObservable = this._dataService.createNew(this.newNoteObj);
     tempObservable.subscribe(
       (response) => {
-        
        this.newNoteObj = response;
-       console.log('create new newNoteObj:', this.newNoteObj);
+      //  console.log('create new newNoteObj:', this.newNoteObj);
+       this.getAllNotes();
       },
       (error) => {
         console.log(error); 
       }
     );
   }
+  getAllNotes(){
+    this._dataService.getAllNotes()
+    .subscribe(
+      (response)=>{
+        console.log('getallnotes :', response);
+        this.allNotesObj = response;
+      }, 
+      (err)=>{
+        console.log('err in getAllNotes  :', err );
+      }
+    );
+  }
+
 
 
 }

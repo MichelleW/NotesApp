@@ -15,7 +15,6 @@ const app = express();
 // Will require: express/app
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 // =====================================
 
 
@@ -72,14 +71,13 @@ const Note = mongoose.model('Note');
 app.use(express.static(path.join(__dirname, "notes-app/dist/notes-app")));
 // =======================================
 
-app.get('/notes',function(req,res){
-	Product.create({noteContent: "remember to get groceries"})
+app.get('/notes', function (req, res) {
 
-	Product.find({}, function (err, products) {
-		console.log('products :', products);
+  Note.find({}, function (err, products) {
+    console.log('products :', products);
     res.json(products);
-	});
-	
+  });
+
 })
 
 
