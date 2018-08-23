@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="border border-secondary p-3 mb-5" *ngIf="newNoteObj">
+
+    {{newNoteObj.newContent}}
+
+    <form (submit)="createNew()" class="form-inline col-md-8">
+
+      <div class="form-group mb-2">
+
+        <input type="text" [(ngModel)]="newNoteObj.newContent" name="newNoteObj.newContent" class="form-control" placeholder="... Enter a note">
+      </div>
+      <button type="submit" class="btn btn-warning mb-2 pr-2" value="Add Note">Add Note</button>
+    </form>
+
+  </div>
+</div>
